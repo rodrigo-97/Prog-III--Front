@@ -1,35 +1,35 @@
 REGRAS DE NEGÓCIO SHINOBI
 
----> Campo NOME
--Não pode ficar em branco
--Não pode ter número
--Não pode ter caractere especial
--Não pode começar e/ou terminar com espaço
+Campo NOME
+Não pode ficar em branco X
+Não pode ter número X
+Não pode ter caractere especial X
+Não pode começar e/ou terminar com espaço X  
 
----> Campo JUTSU MAIS BRABO
--Não pode ficar em branco
--Não pode começar e/ou terminar com espaço
+Campo JUTSU MAIS BRABO
+Não pode ficar em branco
+Não pode começar e/ou terminar com espaço
 
----> Campo DATA DE NASCIMENTO
--Permitir apenas números
+Campo DATA DE NASCIMENTO
+Permitir apenas números
 
----> Campo RIVAL MORTAL
--Aplicar as regras do campo NOME
+Campo RIVAL MORTAL
+Aplicar as regras do campo NOME
 
----> Campo ENTITULAÇÃO
--Aplicar as regras do campo NOME
+Campo ENTITULAÇÃO
+Aplicar as regras do campo NOME
 
----> Campo NÍVEL EM TAIJUTSU
--Aplicar as regras do campo DATA DE NASCIMENTO
+Campo NÍVEL EM TAIJUTSU
+Aplicar as regras do campo DATA DE NASCIMENTO
 
----> Campo NÍVEL EM NINJUTSU
--Aplicar as regras do campo DATA DE NASCIMENTO
+Campo NÍVEL EM NINJUTSU
+Aplicar as regras do campo DATA DE NASCIMENTO
 
----> Campo NÍVEL EM GENJUTSU
--Aplicar as regras do campo DATA DE NASCIMENTO
+Campo NÍVEL EM GENJUTSU
+Aplicar as regras do campo DATA DE NASCIMENTO
 
----> Campo CLÃ
--Aplicar as regras do campo DATA DE NASCIMENTO
+Campo CLÃ
+Aplicar as regras do campo DATA DE NASCIMENTO
 
----> Campo ESTÁ MORTO?
--Verificar se está mandando algo diferente de true ou false
+Campo ESTÁ MORTO?
+Verificar se está mandando algo diferente de true ou false

@@ -21,140 +21,187 @@
       </div>
     </div>
   </nav>
+
   <div v-if="menu == 1">
     <form @submit.prevent="save()" method="post">
       <div
         class="container cadastro border border-4 border-primary"
         style="background-color:white"
       >
-        <div class="form-group">
-          <label for="nome">Nome</label>
-          <input
-            type="text"
-            class="fz"
-            placeholder="Digite o nome do Shinobi"
-            id="nome"
-            v-model="this.shinobi.nome"
-          />
+        <div class="col sm-12" id="status">
+          <div class="alert alert-danger" v-if="erro == true">
+            {{ mensagemErro }}
+          </div>
+          <div class="alert alert-success" v-if="acerto == true">
+            {{ mensagemSucesso }}
+          </div>
         </div>
-
-        <div class="form-group">
-          <label for="j-bolado">Jutsu mais Brabo</label>
-          <input
-            type="text"
-            class="fz"
-            placeholder="Digite o jutsu mais boladão do Shinobi"
-            id="j-bolado"
-            v-model="this.shinobi.jutsuMaisBrabo"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="data">Data de Nascimento</label>
-          <input
-            type="date"
-            class="fz"
-            id="data"
-            v-model="this.shinobi.dataNascimento"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="rival-mortal">Rival Mortal</label>
-          <input
-            type="text"
-            class="fz"
-            placeholder="Digite o inimigo mais sinistro desse Shinobi"
-            id="rival-mortal"
-            v-model="this.shinobi.rivalMortal"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="entitulacao">Entitulação</label>
-          <input
-            type="text"
-            class="fz"
-            placeholder="Digite o inimigo mais sinistro desse Shinobi"
-            id="entitulacao"
-            v-model="this.shinobi.entitulacao"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="n-taijutsu">Nível em Taijutsu</label>
-          <input
-            type="number"
-            placeholder="Digite um valor entre 0 e 10"
-            class="fz"
-            id="n-taijutsu"
-            min="0"
-            max="10"
-            v-model="this.shinobi.nivelTaijutsu"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="n-ninjutsu">Nível em Ninjutsu</label>
-          <input
-            type="number"
-            placeholder="Digite um valor entre 0 e 10"
-            class="fz"
-            id="n-ninjutsu"
-            min="0"
-            max="10"
-            v-model="this.shinobi.nivelNinjutsu"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="n-genjutsu">Nível em Genjutsu</label>
-          <input
-            type="number"
-            placeholder="Digite um valor entre 0 e 10"
-            class="fz"
-            id="n-genjutsu"
-            min="0"
-            max="10"
-            v-model="this.shinobi.nivelGenjutsu"
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="">Clã</label>
-          <select name="cars" class="fz" v-model="this.shinobi.clan">
-            <option v-bind:value="{ id: '1', nome: 'senju' }"> senju </option>
-          </select>
-        </div>
-
-        <fieldset class="form-group fz">
-          <p>Está Morto?</p>
-          <label for="paperSwitch2" class="paper-switch-tile">
-            <input
-              id="paperSwitch2"
-              name="paperSwitch2"
-              type="checkbox"
-              v-model="this.shinobi.morreu"
-            />
-            <div class="paper-switch-tile-card border">
-              <div
-                class="paper-switch-tile-card-front border background-secondary"
-              >
-                Vivão :D
-              </div>
-              <div class="paper-switch-tile-card-back border background-danger">
-                Sim :'C
-              </div>
+        <div class="row margin-none">
+          <div class="col sm-6">
+            <div class="form-group">
+              <label for="nome">Nome</label>
+              <input
+                type="text"
+                class="fz"
+                placeholder="Digite o nome do Shinobi"
+                id="nome"
+                v-model="this.shinobi.nome"
+              />
             </div>
-          </label>
-        </fieldset>
+          </div>
+
+          <div class="col sm-6">
+            <div class="form-group">
+              <label for="data">Data de Nascimento</label>
+              <input
+                type="date"
+                class="fz"
+                id="data"
+                v-model="this.shinobi.dataNascimento"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row margin-none">
+          <div class="col sm-6 padding-top-none">
+            <div class="form-group">
+              <label for="j-bolado">Jutsu mais Brabo</label>
+              <input
+                type="text"
+                class="fz"
+                placeholder="Digite o jutsu mais boladão do Shinobi"
+                id="j-bolado"
+                v-model="this.shinobi.jutsuMaisBrabo"
+              />
+            </div>
+          </div>
+
+          <div class="col sm-6 padding-top-none">
+            <div class="form-group">
+              <label for="rival-mortal">Rival Mortal</label>
+              <input
+                type="text"
+                class="fz"
+                placeholder="Qual o maior rival desse Shinobi?"
+                id="rival-mortal"
+                v-model="this.shinobi.rivalMortal"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row margin-none">
+          <div class="col sm-6 padding-top-none">
+            <div class="form-group">
+              <label for="entitulacao">Entitulação</label>
+              <input
+                type="text"
+                class="fz"
+                placeholder="Como este Shinobi é conhecido?"
+                id="entitulacao"
+                v-model="this.shinobi.entitulacao"
+              />
+            </div>
+          </div>
+
+          <div class="col sm-6 padding-top-none">
+            <div class="form-group">
+              <label for="">Clã</label>
+              <select name="cars" class="fz" v-model="this.shinobi.clan">
+                <option v-bind:value="{ id: '1', nome: 'senju' }">
+                  senju
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row margin-none">
+          <div class="col sm-2 padding-top-none">
+            <div class="form-group">
+              <label for="n-taijutsu">Nível em Taijutsu</label>
+              <input
+                type="number"
+                placeholder="Digite um valor entre 0 e 10"
+                class="fz"
+                id="n-taijutsu"
+                min="0"
+                max="10"
+                v-model="this.shinobi.nivelTaijutsu"
+              />
+            </div>
+          </div>
+
+          <div class="col sm-2 padding-top-none">
+            <div class="form-group">
+              <label for="n-ninjutsu">Nível em Ninjutsu</label>
+              <input
+                type="number"
+                placeholder="Digite um valor entre 0 e 10"
+                class="fz"
+                id="n-ninjutsu"
+                min="0"
+                max="10"
+                v-model="this.shinobi.nivelNinjutsu"
+              />
+            </div>
+          </div>
+
+          <div class="col sm-2 padding-top-none">
+            <div class="form-group">
+              <label for="n-genjutsu">Nível em Genjutsu</label>
+              <input
+                type="number"
+                placeholder="Digite um valor entre 0 e 10"
+                class="fz"
+                id="n-genjutsu"
+                min="0"
+                max="10"
+                v-model="this.shinobi.nivelGenjutsu"
+              />
+            </div>
+          </div>
+
+          <div class="col sm-6 padding-top-none">
+            <fieldset class="form-group margin-none">
+              <p class="margin-top-none">Está Morto?</p>
+              <label for="paperSwitch2" class="paper-switch-tile">
+                <input
+                  id="paperSwitch2"
+                  name="paperSwitch2"
+                  type="checkbox"
+                  v-model="this.shinobi.morreu"
+                />
+                <div class="paper-switch-tile-card border">
+                  <div
+                    class="paper-switch-tile-card-front border background-secondary"
+                  >
+                    Vivão :D
+                  </div>
+                  <div
+                    class="paper-switch-tile-card-back border background-danger"
+                  >
+                    Sim :'C
+                  </div>
+                </div>
+              </label>
+            </fieldset>
+          </div>
+        </div>
+
         <div class="btn-enviar">
           <button
             type="submit"
-            class="btn-success-outline"
+            class="btn-secondary"
             value="Salvar"
             style="width:40%"
           >
+            <label
+              for="modal-1"
+              class="paper-btn margin"
+              style="display: none"
+            ></label>
             Salvar
           </button>
         </div>
@@ -162,7 +209,7 @@
     </form>
   </div>
 
-  <div v-if="menu == 2">
+  <div v-if="menu == 2 && this.shinobis.length > 0">
     class="border border-5 border-primary child-borders child-shadows"
     <div class="listagem">
       <table
@@ -186,50 +233,50 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="shinobi in shinobis" :key="shinobi.id">
+          <tr v-for="_shinobi in shinobis" :key="_shinobi.id">
             <td>
-              {{ shinobi.id }}
+              {{ _shinobi.id }}
             </td>
             <td>
-              {{ shinobi.nome }}
+              {{ _shinobi.nome }}
             </td>
             <td>
-              {{ shinobi.jutsuMaisBrabo }}
+              {{ _shinobi.jutsuMaisBrabo }}
             </td>
             <td>
-              {{ shinobi.dataNascimento }}
+              {{ _shinobi.dataNascimento }}
             </td>
             <td>
-              {{ shinobi.rivalMortal }}
+              {{ _shinobi.rivalMortal }}
             </td>
             <td>
-              {{ shinobi.nivelTaijutsu }}
+              {{ _shinobi.nivelTaijutsu }}
             </td>
             <td>
-              {{ shinobi.nivelNinjutsu }}
+              {{ _shinobi.nivelNinjutsu }}
             </td>
             <td>
-              {{ shinobi.nivelGenjutsu }}
+              {{ _shinobi.nivelGenjutsu }}
             </td>
             <td>
-              {{ shinobi.clan.nome }}
+              {{ _shinobi.clan.nome }}
             </td>
             <td>
-              {{ shinobi.morreu }}
+              {{ _shinobi.morreu }}
             </td>
             <td>
-              {{ shinobi.entitulacao }}
+              {{ _shinobi.entitulacao }}
             </td>
             <td>
               <input
                 type="button"
                 class="btn-secondary"
                 value="Atualizar"
-                @click="remove(shinobi)"
+                @click="remove(_shinobi)"
               />
             </td>
             <td>
-              <button class="btn-danger" @click="remove(shinobi)">
+              <button class="btn-danger" @click="remove(_shinobi.id)">
                 Remover
               </button>
             </td>
@@ -299,6 +346,10 @@ export default {
     return {
       idClan: "",
       nomeClan: "",
+      mensagem: "",
+      mensagemSucesso: "",
+      erro: false,
+      acerto: false,
 
       menu: 1,
       shinobis: [],
@@ -322,10 +373,25 @@ export default {
 
   methods: {
     save() {
-      alert("pausado");
-      ShinobiService.insert(this.shinobi).then((res) => {
-        console.log("sasasasas" + res.data);
-      });
+      ShinobiService.insert(this.shinobi)
+        .then((response) => {
+          if (response.status == 200) {
+            this.mensagemSucesso = "Cadastro efetuado com sucesso!";
+            this.acerto = true;
+          }
+          console.log(response.status);
+          setTimeout(() => {
+            this.acerto = false;
+          }, 10000);
+        })
+        .catch((error) => {
+          this.mensagemErro = error.response.data.message;
+          this.erro = true;
+
+          setTimeout(() => {
+            this.erro = false;
+          }, 10000);
+        });
     },
 
     edit(shinobi) {
@@ -333,7 +399,8 @@ export default {
     },
 
     remove(shinobi) {
-      console.log(shinobi.toString);
+      console.log(shinobi)
+      ShinobiService.remove(shinobi)
     },
   },
 
@@ -341,6 +408,8 @@ export default {
     ShinobiService.list().then((res) => {
       this.shinobis = res;
     });
+
+    console.log();
   },
 };
 </script>
@@ -383,5 +452,11 @@ export default {
 .btn-enviar {
   display: flex;
   justify-content: flex-end;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 </style>
