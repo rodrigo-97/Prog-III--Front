@@ -12,8 +12,11 @@ export default {
     return await Axios.post(urlInsert, shinobi);
   },
 
-  remove: async (shinobi) => {
-    console.log(shinobi.nome)
-    return await Axios.delete(urlDelete, {id: shinobi})
+  remove: async (id) => {
+    return await Axios.delete(urlDelete+id)
+  },
+
+  update: async(shinobi) => {
+    return await Axios.put(urlInsert, shinobi)
   }
 };

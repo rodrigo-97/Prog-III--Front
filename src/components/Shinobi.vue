@@ -210,7 +210,25 @@
   </div>
 
   <div v-if="menu == 2 && this.shinobis.length > 0">
-    class="border border-5 border-primary child-borders child-shadows"
+    <div class="row flex-spaces child-borders" style="display: none">
+      <label class="paper-btn margin" for="modal-1">Excluir</label>
+    </div>
+    <input class="modal-state" id="modal-1" type="checkbox" />
+    <div class="modal">
+      <label class="modal-bg" for="modal-1"></label>
+      <div class="modal-body">
+        <label class="btn-close" for="modal-1">X</label>
+        <h4 class="modal-title">Confirmar Exclusão</h4>
+        <h5 class="modal-subtitle">{{ modal.nome }}</h5>
+        <p class="modal-text">
+          Você tem absoluta certa que deseja remover o shinobi deste incrível
+          sistema?
+        </p>
+        <label for="modal-1" class="modal-link" @click="remove(modal.id)"
+          >Sim</label
+        >
+      </div>
+    </div>
     <div class="listagem">
       <table
         style="background-color:white; margin-bottom: 5rem; padding: 1rem"
@@ -233,7 +251,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="_shinobi in shinobis" :key="_shinobi.id">
+          <tr v-for="(_shinobi, index) in shinobis" :key="_shinobi.id">
             <td>
               {{ _shinobi.id }}
             </td>
@@ -272,13 +290,27 @@
                 type="button"
                 class="btn-secondary"
                 value="Atualizar"
-                @click="remove(_shinobi)"
+                @click="edit(_shinobi)"
               />
             </td>
             <td>
-              <button class="btn-danger" @click="remove(_shinobi.id)">
+              <!-- <button class="btn-danger" @click="remove(_shinobi)">
                 Remover
-              </button>
+              </button> -->
+              <div class="row flex-spaces child-borders">
+                <label
+                  class="paper-btn marginm margin-none"
+                  style="background-color:#eac8c9; border-color: #bc605b; border-style:doted"
+                  for="modal-1"
+                  @click="
+                    (modal.nome = _shinobi.nome),
+                      (modal.id = _shinobi.id),
+                      (modal.index = index)
+                  "
+                  >Excluir</label
+                >
+              </div>
+              <input class="modal-state" id="modal-1" type="checkbox" />
             </td>
           </tr>
         </tbody>
@@ -351,6 +383,12 @@ export default {
       erro: false,
       acerto: false,
 
+      modal: {
+        nome: "",
+        id: "",
+        index: "",
+      },
+
       menu: 1,
       shinobis: [],
       shinobi: {
@@ -373,34 +411,50 @@ export default {
 
   methods: {
     save() {
-      ShinobiService.insert(this.shinobi)
-        .then((response) => {
-          if (response.status == 200) {
-            this.mensagemSucesso = "Cadastro efetuado com sucesso!";
-            this.acerto = true;
-          }
-          console.log(response.status);
-          setTimeout(() => {
-            this.acerto = false;
-          }, 10000);
-        })
-        .catch((error) => {
-          this.mensagemErro = error.response.data.message;
-          this.erro = true;
+      if (this.shinobi.id == "") {
+        ShinobiService.insert(this.shinobi)
+          .then((response) => {
+            if (response.status == 200) {
+              this.mensagemSucesso = "Cadastro efetuado com sucesso!";
+              this.acerto = true;
+            }
+            setTimeout(() => {
+              this.acerto = false;
+            }, 10000);
+          })
+          .catch((error) => {
+            this.mensagemErro = error.response.data.message;
+            this.erro = true;
 
-          setTimeout(() => {
-            this.erro = false;
-          }, 10000);
+            setTimeout(() => {
+              this.erro = false;
+            }, 10000);
+          });
+      } else {
+        ShinobiService.update(this.shinobi).then((response) => {
+          if (response.status == 200) {
+            this.mensagemSucesso = "Cadastro alterado com sucesso, DATEBAYO!";
+            this.acerto = true;
+
+            setTimeout(()=>{
+              this.acerto = false;
+            }, 10000)
+          }
         });
+      }
     },
 
-    edit(shinobi) {
-      console.log(shinobi);
+    edit(_shinobi) {
+      this.shinobi = _shinobi;
+      this.menu = 1;
     },
 
     remove(shinobi) {
-      console.log(shinobi)
-      ShinobiService.remove(shinobi)
+      ShinobiService.remove(shinobi).then(() => {
+        this.shinobis.splice(this.modal.index, 1);
+        console.log(this.shinobis);
+        console.log(this.modal.index);
+      });
     },
   },
 
