@@ -1,14 +1,24 @@
 <template>
-  <img src="https://wallpapercave.com/wp/wp2875008.jpg" class="bg_video" />
-  <Shinobi />
+<img src="https://wallpapercave.com/wp/wp2875008.jpg" class="bg_video" />
+<Menu />
+<Esqueleto />
 </template>
 
 <script>
-import Shinobi from "./components/Shinobi";
+import Esqueleto from "./components/esqueleto";
+import Menu from "./components/menu";
+import {
+  store
+} from "./index";
 
 export default {
   components: {
-		Shinobi,
+    Menu,
+    Esqueleto,
+  },
+
+  mounted() {
+    store.commit("menuOpcao", 1)
   },
 };
 </script>
