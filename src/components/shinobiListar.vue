@@ -94,9 +94,9 @@
                   for="modal-1"
                   @click="
                     (modal.nome = shinobi.nome),
-                      (modal.id = shinobi.id),
-                      (modal.index = index),
-                      (modal.entitulacao = shinobi.entitulacao)
+                    (modal.id = shinobi.id),
+                    (modal.index = index),
+                    (modal.entitulacao = shinobi.entitulacao)
                   "
                   >Excluir</label
                 >
@@ -131,13 +131,13 @@ export default {
 
   mounted() {
     ShinobiService.list().then((response) => {
-      this.shinobis = response;
+      this.shinobis = response.data;
     });
   },
 
   methods: {
-    remove(shinobi) {
-      ShinobiService.remove(shinobi).then(() => {
+    remove(id) {
+      ShinobiService.remove(id).then(() => {
         this.shinobis.splice(this.modal.index, 1);
         console.log(this.shinobis);
         console.log(this.modal.index);
@@ -168,7 +168,7 @@ export default {
 
 .listar {
   background-color: white;
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
   padding: 1rem;
 }
 </style>

@@ -15,7 +15,6 @@ const store = new Vuex.Store({
             morreu: "",
             entitulacao: "",
             clan: {
-                id: "",
             }
         },
     },

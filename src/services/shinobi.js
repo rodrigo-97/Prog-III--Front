@@ -1,22 +1,25 @@
-const { default: Axios } = require("axios");
-const url = "http://localhost:3333/api/shinobis";
-const urlInsert = "http://localhost:3333/api/shinobi";
-const urlDelete = "http://localhost:3333/api/shinobi/";
+const axios = require('axios');
+
+
+const http = axios.create({
+  baseURL: 'http://localhost:3333/api',
+  timeout: 1000,
+});
 
 export default {
   list: async () => {
-    return (await Axios.get(url)).data;
+    return await http.get("/shinobis");
   },
 
   insert: async (shinobi) => {
-    return await Axios.post(urlInsert, shinobi);
+    return await http.post("/shinobi", shinobi);
   },
 
   remove: async (id) => {
-    return await Axios.delete(urlDelete+id)
+    return await http.delete("/shinobi/"+id)
   },
 
   update: async(shinobi) => {
-    return await Axios.put(urlInsert, shinobi)
+    return await http.put("/shinobi", shinobi)
   }
 };

@@ -81,8 +81,10 @@
         <div class="col sm-6 padding-top-none">
           <div class="form-group">
             <label for="">Clã</label>
-            <select name="cars" class="preencher" v-model="this.shinobi.clan">
-              <option v-bind:value="{ id: '1', nome: 'senju' }">senju</option>
+            <select name="clans" class="preencher" v-model="shinobi.clan">
+              <option v-for="clan in clans" :key="clan.id"  v-bind:value="{nome: clan.nome, id: clan.id}">
+                {{ clan.nome }}
+              </option>
             </select>
           </div>
         </div>
@@ -198,6 +200,7 @@
 import { mapGetters, mapMutations } from "vuex";
 import { store } from "../index";
 import ShinobiService from "../services/shinobi";
+import ClanService from "../services/clan";
 
 export default {
   name: "ShinobiCadastro",
@@ -213,7 +216,14 @@ export default {
       mensagemSucesso: "",
       erro: false,
       acerto: false,
+      clans: [],
     };
+  },
+
+  mounted() {
+    ClanService.list().then((response) => {
+      this.clans = response.data;
+    });
   },
 
   methods: {
@@ -239,11 +249,13 @@ export default {
 
     save() {
       if (this.shinobi.id == "") {
+        console.log(this.shinobi.clan.id)
         ShinobiService.insert(this.shinobi)
           .then((response) => {
             if (response.status == 200) {
               this.mensagemSucesso = "Cadastro efetuado com sucesso!";
               this.acerto = true;
+              this.limparCampos();
             }
             setTimeout(() => {
               this.acerto = false;
@@ -262,6 +274,7 @@ export default {
           if (response.status == 200) {
             this.mensagemSucesso = "Cadastro alterado com sucesso, DATEBAYO!";
             this.acerto = true;
+            this.limparCampos();
 
             setTimeout(() => {
               this.acerto = false;
@@ -285,11 +298,10 @@ export default {
   width: 6em;
   background-color: white;
 
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   width: 60%;
-  height: 50%;
 }
 
 .btn-enviar {

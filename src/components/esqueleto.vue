@@ -1,76 +1,45 @@
 <template>
+  <!-- Tela de cadastro de Shinobi -->
   <div v-if="menu == 1">
     <ShinobiCadastro />
   </div>
+
+  <!-- Tela de listagem de Shinobi -->
   <div v-if="menu == 2">
     <ShinobiListar />
   </div>
 
+  <!-- Tela de cadastro e listagem de usuários -->
   <div v-if="menu == 3">
-    <div class="">
-      <form @submit.prevent="save()" method="post">
-        <div
-          class="container cadastro border border-4 border-primary"
-          style="background-color: white"
-        >
-          <div class="form-group">
-            <label for="email">E-mail</label>
-            <input
-              type="email"
-              class="fz"
-              placeholder='Exemplo "narutim_rasengan@noveCaldas.com"'
-              id="email"
-            />
-          </div>
+    <Usuario />
+  </div>
 
-          <div class="form-group">
-            <label for="j-bolado">Apelido</label>
-            <input
-              type="text"
-              class="fz"
-              placeholder='Exemplo "Testa de marquize" que nem a Sakura xD'
-              id="j-bolado"
-            />
-          </div>
-
-          <div class="form-group">
-            <label for="senha">Senha</label>
-            <input
-              type="password"
-              class="fz"
-              placeholder="Arte sábiaaaaaaa!!! Jutsu da proteção de senha \O/"
-              id="senha"
-            />
-          </div>
-          <button
-            type="submit"
-            class="btn-success-outline border border-3 border-primary"
-            value="Salvar"
-            style="width: 40%"
-          >
-            Salvar
-          </button>
-        </div>
-      </form>
-    </div>
+  <!-- Tela de cadastro e listagem de Clãs -->
+  <div v-if="menu == 4">
+    <Clan />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import ShinobiListar from "./shinobiListar";
-import ShinobiCadastro from "./shinobiCadastro";
+import ShinobiListar from "../components/shinobiListar";
+import ShinobiCadastro from "../components/shinobiCadastro.vue";
+import Usuario from "../components/usuario.vue";
+import Clan from "../components/clan.vue";
 
 export default {
   name: "Esqueleto",
 
   computed: {
-    ...mapGetters(["menu", "mErro", "mSucesso"]),
+    ...mapGetters(["menu"]),
   },
 
   components: {
     ShinobiListar,
-    ShinobiCadastro
+    ShinobiCadastro,
+    Usuario,
+    Clan
   },
 };
+
 </script>

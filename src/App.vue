@@ -1,5 +1,5 @@
 <template>
-<img src="https://wallpapercave.com/wp/wp2875008.jpg" class="bg_video" />
+<img src="./images/1.jpg" class="bg_video" />
 <Menu />
 <Esqueleto />
 </template>

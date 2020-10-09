@@ -17,7 +17,7 @@
           </li>
           <li><a href="#" @click="mudarMenu(2)">Listagem</a></li>
           <li><a href="#" @click="mudarMenu(3)">Usuários</a></li>
-          <li><a href="#" @click="mudarMenu(0)">Clãs</a></li>
+          <li><a href="#" @click="mudarMenu(4)">Clãs</a></li>
           <li><a href="#" @click="mudarMenu(0)">Sair</a></li>
         </ul>
       </div>
