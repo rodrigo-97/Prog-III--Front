@@ -8,69 +8,67 @@
         {{ mensagemSucesso }}
       </div>
     </div>
-    <form @submit.prevent="save()" method="post">
-      <div class="container" style="background-color: white">
-        <div class="row margin-none">
-          <div class="col sm-6">
-            <div class="form-group">
-              <label for="nome">Nome do Clã</label>
-              <input
-                type="text"
-                class="preencher"
-                placeholder='Exemplo "Senju"'
-                id="clan"
-                maxlength="35"
-                v-model="this.clan.nome"
-              />
+    <div>
+      <div>
+        <form @submit.prevent="save()" method="post">
+          <div class="container" style="background-color: white">
+            <div class="row margin-none">
+              <div class="col sm-12">
+                <div class="form-group">
+                  <label for="nome">Nome do Clã</label>
+                  <input
+                    type="text"
+                    class="preencher col sm-12 margin-none"
+                    placeholder='Exemplo "Senju"'
+                    id="clan"
+                    maxlength="35"
+                    style="margin: none"
+                    v-model="this.clan.nome"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="btn-secondary border border-3 border-primary col sm-4"
+                  value="Salvar"
+                  style="width: 50%"
+                >
+                  Salvar
+                </button>
+              </div>
             </div>
           </div>
-          <button
-            type="submit"
-            class="btn-secondary border border-3 border-primary"
-            value="Salvar"
-            style="width: 25%"
-          >
-            Salvar
-          </button>
-          <button
-            type="button"
-            class="paper-btn btn-primary-outline border border-1"
-            value="Salvar"
-            style="width: 25%"
-          >
-            Limpar campo
-          </button>
-        </div>
+        </form>
       </div>
-    </form>
-
-    <table class="table-hover border border-5 border-primary padding-none">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nome</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="clan in clans" :key="clan.id">
-          <td>
-            {{ clan.id }}
-          </td>
-          <td>
-            {{ clan.nome }}
-          </td>
-          <td>
-            <input
-              type="button"
-              class="btn-secondary"
-              value="Atualizar"
-              @click="this.clan = clan"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div>
+        <table class="table-hover col sm-12">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="clan in clans" :key="clan.id">
+              <td>
+                {{ clan.id }}
+              </td>
+              <td>
+                {{ clan.nome }}
+              </td>
+              <td>
+                <input
+                  type="button"
+                  class="btn-secondary"
+                  value="Atualizar"
+                  @click="this.clan = clan"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -112,6 +110,9 @@ export default {
             setTimeout(() => {
               this.erro = false;
             }, 10000);
+          })
+          .finally(() => {
+            this.limparCampos();
           });
       } else {
         ClanService.update(this.clan).then((response) => {
@@ -125,7 +126,6 @@ export default {
           }
         });
       }
-      this.limparCampos();
     },
 
     listar() {
@@ -135,7 +135,7 @@ export default {
     },
 
     limparCampos() {
-      this.clan = {};
+      this.clan = { nome: "", id: "" };
     },
   },
 
