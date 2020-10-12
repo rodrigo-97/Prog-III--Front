@@ -1,13 +1,10 @@
 <template>
   <form @submit.prevent="save()" method="post">
     <div class="container cadastro border border-4 border-primary">
-      <div class="col sm-12" id="status">
-        <div class="alert alert-danger" v-if="erro == true">
-          {{ mensagemErro }}
-        </div>
-        <div class="alert alert-success" v-if="acerto == true">
-          {{ mensagemSucesso }}
-        </div>
+      <div class="row margin-none">
+        <div v-if="this.shinobi.id == ''">Estado: Cadastrando 📘</div>
+        <div v-else>Estado: Alterando 📒 <br>
+        *Se vc limpar os campos o estado volta para "cadastrando" 😘</div>
       </div>
       <div class="row margin-none">
         <div class="col sm-6">
@@ -82,7 +79,11 @@
           <div class="form-group">
             <label for="">Clã</label>
             <select name="clans" class="preencher" v-model="shinobi.clan">
-              <option v-for="clan in clans" :key="clan.id"  v-bind:value="{nome: clan.nome, id: clan.id}">
+              <option
+                v-for="clan in clans"
+                :key="clan.id"
+                v-bind:value="{ nome: clan.nome, id: clan.id }"
+              >
                 {{ clan.nome }}
               </option>
             </select>
@@ -201,6 +202,7 @@ import { mapGetters, mapMutations } from "vuex";
 import { store } from "../index";
 import ShinobiService from "../services/shinobi";
 import ClanService from "../services/clan";
+import { crud } from "../Interfaces/crud";
 
 export default {
   name: "ShinobiCadastro",
@@ -212,10 +214,6 @@ export default {
 
   data() {
     return {
-      mensagemErro: "",
-      mensagemSucesso: "",
-      erro: false,
-      acerto: false,
       clans: [],
     };
   },
@@ -248,40 +246,12 @@ export default {
     },
 
     save() {
-      if (this.shinobi.id == "") {
-        console.log(this.shinobi.clan.id)
-        ShinobiService.insert(this.shinobi)
-          .then((response) => {
-            if (response.status == 200) {
-              this.mensagemSucesso = "Cadastro efetuado com sucesso!";
-              this.acerto = true;
-              this.limparCampos();
-            }
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          })
-          .catch((error) => {
-            this.mensagemErro = error.response.data.message;
-            this.erro = true;
-
-            setTimeout(() => {
-              this.erro = false;
-            }, 10000);
-          });
-      } else {
-        ShinobiService.update(this.shinobi).then((response) => {
-          if (response.status == 200) {
-            this.mensagemSucesso = "Cadastro alterado com sucesso, DATEBAYO!";
-            this.acerto = true;
-            this.limparCampos();
-
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          }
-        });
-      }
+      crud.insert(
+        this.shinobi,
+        ShinobiService,
+        this.shinobi.nome + " cadastrado com sucesso"
+      );
+      this.limparCampos();
     },
   },
 };

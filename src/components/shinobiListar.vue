@@ -1,26 +1,5 @@
 <template>
   <div>
-    <div class="row flex-spaces child-borders" style="display: none">
-      <label class="paper-btn margin" for="modal-1">Excluir</label>
-    </div>
-    <input class="modal-state" id="modal-1" type="checkbox" />
-    <div class="modal" style="width: 100%; height: 100%">
-      <label class="modal-bg" for="modal-1"></label>
-      <div class="modal-body">
-        <label class="btn-close" for="modal-1">X</label>
-        <h4 class="modal-title">Confirmar Exclusão</h4>
-        <h5 class="modal-subtitle">
-          {{ modal.nome }} ({{ modal.entitulacao }})
-        </h5>
-        <p class="modal-text">
-          Você tem absoluta certa que deseja remover o shinobi deste incrível
-          sistema?
-        </p>
-        <label for="modal-1" class="modal-link" @click="remove(modal.id)"
-          >Sim</label
-        >
-      </div>
-    </div>
     <div class="listagem">
       <table class="table-hover border border-5 border-primary listar">
         <thead>
@@ -92,12 +71,7 @@
                     border-style: doted;
                   "
                   for="modal-1"
-                  @click="
-                    (modal.nome = shinobi.nome),
-                    (modal.id = shinobi.id),
-                    (modal.index = index),
-                    (modal.entitulacao = shinobi.entitulacao)
-                  "
+                  @click="(shinobi.index = index), remover(shinobi.id, shinobi.nome)"
                   >Excluir</label
                 >
               </div>
@@ -113,12 +87,13 @@
 <script>
 import ShinobiService from "../services/shinobi";
 import { store } from "../index";
+import { crud } from "../Interfaces/crud";
 export default {
   name: "ShinobiListar",
 
   data() {
     return {
-      modal: {
+      shinobi: {
         nome: "",
         id: "",
         index: "",
@@ -130,23 +105,23 @@ export default {
   },
 
   mounted() {
-    ShinobiService.list().then((response) => {
-      this.shinobis = response.data;
-    });
+    this.listar();
   },
 
   methods: {
-    remove(id) {
-      ShinobiService.remove(id).then(() => {
-        this.shinobis.splice(this.modal.index, 1);
-        console.log(this.shinobis);
-        console.log(this.modal.index);
-      });
+     remover(id, nome) {
+      crud.remove(id, ShinobiService, nome, this.shinobis, this.shinobi.index)
     },
 
     edit(shinobi) {
       store.commit("shinobiCadastro", shinobi);
       store.commit("menuOpcao", "1");
+    },
+
+    listar() {
+      ShinobiService.list().then((response) => {
+        this.shinobis = response.data;
+      });
     },
   },
 };

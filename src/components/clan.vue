@@ -74,6 +74,9 @@
 
 <script>
 import ClanService from "../services/clan";
+import { crud } from "../Interfaces/crud";
+
+import { mapGetters } from "vuex"
 export default {
   data() {
     return {
@@ -82,7 +85,7 @@ export default {
         id: "",
       },
 
-      clans: [],
+      clans: mapGetters["menu"],
       mensagemErro: "",
       mensagemSucesso: "",
       acerto: false,
@@ -92,50 +95,17 @@ export default {
 
   methods: {
     save() {
-      if (this.clan.id == "") {
-        ClanService.insert(this.clan)
-          .then((response) => {
-            if (response.status == 200) {
-              this.listar();
-              this.mensagemSucesso = "Cadastro efetuado com sucesso!";
-              this.acerto = true;
-            }
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          })
-          .catch((error) => {
-            this.mensagemErro = error.response.data.message;
-            this.erro = true;
-            setTimeout(() => {
-              this.erro = false;
-            }, 10000);
-          })
-          .finally(() => {
-            this.limparCampos();
-          });
-      } else {
-        ClanService.update(this.clan).then((response) => {
-          if (response.status == 200) {
-            this.mensagemSucesso = "Cadastro alterado com sucesso, DATEBAYO!";
-            this.acerto = true;
+      crud.insert(this.clan, ClanService)
+      .then(()=>{
+       this.listar()
 
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          }
-        });
-      }
+      })
     },
 
     listar() {
       ClanService.list().then((response) => {
         this.clans = response.data;
       });
-    },
-
-    limparCampos() {
-      this.clan = { nome: "", id: "" };
     },
   },
 

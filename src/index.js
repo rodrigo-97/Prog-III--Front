@@ -21,7 +21,8 @@ const store = new Vuex.Store({
 
     getters: {
         menu: (state) => state.menu,
-        shinobi: (state) => state.shinobi
+        shinobi: (state) => state.shinobi,
+        clans: (state) => state.clans
     },
 
     mutations: {
@@ -39,7 +40,7 @@ const store = new Vuex.Store({
 
         shinobiCadastro: (state, shinobi) => {
             state.shinobi = shinobi
-        }
+        },
     },
 });
 
