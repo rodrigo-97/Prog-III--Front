@@ -224,6 +224,8 @@ export default {
     ClanService.list().then((response) => {
       this.clans = response.data;
     });
+
+    console.log(this.clans)
   },
 
   methods: {
