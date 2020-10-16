@@ -74,14 +74,11 @@
 
 <script>
 import ClanService from "../services/clan";
+import { crud } from "../Mini-controlador/controlador";
+import { mapGetters } from "vuex"
 export default {
   data() {
     return {
-      clan: {
-        nome: "",
-        id: "",
-      },
-
       clans: [],
       mensagemErro: "",
       mensagemSucesso: "",
@@ -90,42 +87,13 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters(["clan"])
+  },
+
   methods: {
     save() {
-      if (this.clan.id == "") {
-        ClanService.insert(this.clan)
-          .then((response) => {
-            if (response.status == 200) {
-              this.listar();
-              this.mensagemSucesso = "Cadastro efetuado com sucesso!";
-              this.acerto = true;
-            }
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          })
-          .catch((error) => {
-            this.mensagemErro = error.response.data.message;
-            this.erro = true;
-            setTimeout(() => {
-              this.erro = false;
-            }, 10000);
-          })
-          .finally(() => {
-            this.limparCampos();
-          });
-      } else {
-        ClanService.update(this.clan).then((response) => {
-          if (response.status == 200) {
-            this.mensagemSucesso = "Cadastro alterado com sucesso, DATEBAYO!";
-            this.acerto = true;
-
-            setTimeout(() => {
-              this.acerto = false;
-            }, 10000);
-          }
-        });
-      }
+      crud.insert(this.clan, ClanService)
     },
 
     listar() {

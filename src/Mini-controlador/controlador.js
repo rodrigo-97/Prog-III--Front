@@ -1,5 +1,4 @@
 import Swal from "sweetalert2"
-
 const crud = {
   insert: (entidade, service) => {
     service.insert(entidade)
@@ -12,7 +11,7 @@ const crud = {
               showConfirmButton: false,
               timer: 2000
             })
-          } else {
+          }else{
             Swal.fire({
               icon: 'success',
               title: "Cadastro alterado 😁",
@@ -32,7 +31,6 @@ const crud = {
   },
 
   remove: (id, service, nome, listaEntidade, index, nomeEntidade) => {
-
     Swal.fire({
       title: "Confirmar exclusão",
       text: `O ${nomeEntidade} ${nome} será removido de forma definitiva 😭`,
@@ -49,15 +47,15 @@ const crud = {
             listaEntidade.splice(index, 1);
           }
         })
-          .catch((erro) => {
-            Swal.fire({
-              title: "Ops... Deu ruim 😭",
-              text: `${erro}`,
-              icon: "warning",
-              confirmButtonColor: "#4d9ce9",
-              confirmButtonText: "Ok",
-            })
+        .catch((erro) => {
+          Swal.fire({
+            title: "Ops... Deu ruim 😭",
+            text: `${erro}`,
+            icon: "warning",
+            confirmButtonColor: "#4d9ce9",
+            confirmButtonText: "Ok",
           })
+        })
       }
     });
   },

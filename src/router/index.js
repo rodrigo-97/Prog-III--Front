@@ -1,14 +1,11 @@
 import Router from "vue-router"
 
 
-
-
 import  ShinobiListar from "../components/shinobiListar.vue"
 
 const rotas = [
   {
-    name: "l-shinobi",
-    path: "/",
+    path: "/listar-shinobi",
     component: ShinobiListar
   }
 ]

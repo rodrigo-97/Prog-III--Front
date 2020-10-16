@@ -1,24 +1,22 @@
 <template>
-<img src="./images/1.jpg" class="bg_video" />
-<Menu />
-<Esqueleto />
+  <img src="./images/1.jpg" class="bg_video" />
+
+  <router-view />
 </template>
 
 <script>
-import Esqueleto from "./components/esqueleto";
-import Menu from "./components/menu";
-import {
-  store
-} from "./index";
+// import Esqueleto from "./components/esqueleto";
+// import Menu from "./components/menu";
+import { store } from "./index";
 
 export default {
-  components: {
-    Menu,
-    Esqueleto,
-  },
+  // components: {
+  //   Menu,
+  //   Esqueleto,
+  // },
 
   mounted() {
-    store.commit("menuOpcao", 1)
+    store.commit("menuOpcao", 1);
   },
 };
 </script>

@@ -1,48 +1,50 @@
 import Vuex from "vuex";
 
 const store = new Vuex.Store({
-    state: {
-        menu: 1,
-        shinobi: {
-            id: "",
-            nome: "",
-            jutsuMaisBrabo: "",
-            dataNascimento: "",
-            rivalMortal: "",
-            nivelNinjutsu: 0,
-            nivelTaijutsu: 0,
-            nivelGenjutsu: 0,
-            morreu: "",
-            entitulacao: "",
-            clan: {
-            }
-        },
-    },
+	state: {
+		menu: 1,
+		shinobi: {
+			id: "",
+			nome: "",
+			jutsuMaisBrabo: "",
+			dataNascimento: "",
+			rivalMortal: "",
+			nivelNinjutsu: 0,
+			nivelTaijutsu: 0,
+			nivelGenjutsu: 0,
+			morreu: "",
+			entitulacao: "",
+			clan: {
+			}
+		},
+		clan: {
+			id: "",
+			nome: "",
+			index: ""
+		}
+	},
 
-    getters: {
-        menu: (state) => state.menu,
-        shinobi: (state) => state.shinobi
-    },
+	getters: {
+		menu: (state) => state.menu,
+		shinobi: (state) => state.shinobi,
+		clan: state => state.clan
+	},
 
-    mutations: {
-        mensagemErro(state, valor) {
-            state.mensagemErro = valor;
-        },
+	mutations: {
+		menuOpcao: (state, valor) => {
+			state.menu = valor
+		},
 
-        mensagemSucesso: (state, valor) => {
-            state.mensagemSucesso = valor;
-        },
+		shinobiCadastro: (state, shinobi) => {
+			state.shinobi = shinobi
+		},
 
-        menuOpcao: (state, valor) => {
-            state.menu = valor
-        },
-
-        shinobiCadastro: (state, shinobi) => {
-            state.shinobi = shinobi
-        }
-    },
+		clanCadastro: (state, clan) => {
+			state.clan = clan
+		}
+	},
 });
 
 export {
-    store
+	store
 };

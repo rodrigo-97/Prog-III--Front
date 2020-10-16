@@ -7,19 +7,19 @@ const http = axios.create({
 });
 
 export default {
-  list: async () => {
-    return await http.get("/shinobis");
+  list: () => {
+    return http.get("/shinobis");
   },
 
-  insert: async (shinobi) => {
-    return await http.post("/shinobi", shinobi);
+  insert: (shinobi) => {
+    return http.post("/shinobi", shinobi);
   },
 
-  remove: async (id) => {
-    return await http.delete("/shinobi/"+id)
+  remove: (id) => {
+    return http.delete("/shinobi/"+id)
   },
 
-  update: async(shinobi) => {
-    return await http.put("/shinobi", shinobi)
+  update:(shinobi) => {
+    return http.put("/shinobi", shinobi)
   }
 };

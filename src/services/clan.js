@@ -7,15 +7,20 @@ const http = axios.create({
 });
 
 export default {
-  list: async () => {
-    return await http.get("/clans");
+  list: () => {
+    return http.get("/clans");
   },
 
-  insert: async (clan) => {
-    return await http.post("/clan", clan);
+  insert: (clan) => {
+    return http.post("/clan", clan);
   },
 
-  update: async(clan) => {
-    return await http.put("/clan", clan)
-  }
+  update: (clan) => {
+    return http.put("/clan", clan)
+  },
+
+  remove: (id) => {
+    return http.delete("/shinobi/" + id)
+  },
+
 };
