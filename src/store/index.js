@@ -1,3 +1,8 @@
+/*
+* @Detalhe: Faz controle de estado da aplicação
+* @author: Rodrigo
+*/
+
 import Vuex from "vuex";
 import Vue from "vue"
 Vue.use(Vuex)
@@ -25,11 +30,19 @@ const store = new Vuex.Store({
 		}
 	},
 
+
+	/*
+	* @detalhe: Expõe os atributos de forma global para que qualquer componente possa fazer acesso
+	* 					Funciona como um get normal
+	*/
 	getters: {
 		shinobi: (state) => state.shinobi,
 		clan: state => state.clan
 	},
 
+	/*
+	* @detalhe: Funciona como um set normal. Seta um novo valor a uma atributo global
+	*/
 	mutations: {
 		shinobiCadastro: (state, shinobi) => {
 			state.shinobi = shinobi

@@ -1,5 +1,8 @@
 <template>
-  <div class="border border-4 border-primary" style="background-color:white">
+  <div
+    class="listar border border-4 border-primary"
+    style="background-color: white"
+  >
     <table class="table-hover col sm-12">
       <thead>
         <tr>
@@ -29,7 +32,7 @@
                 border-color: #bc605b;
                 border-style: doted;
               "
-              @click="(clan.index = index), remover(clan.id, clan.nome)"
+              @click="(clan.index = index), remover(clan.id, clan.nome, index)"
               >Excluir</label
             >
           </td>
@@ -43,32 +46,26 @@
 import ClanService from "../services/clan";
 import { crud } from "../Mini-controlador/controlador";
 import store from "../store";
+
+
 export default {
   data() {
     return {
-      clan: {
-        nome: "",
-        id: "",
-        index: "",
-      },
-
       clans: [],
     };
   },
 
-  mounted() {
-    this.listar();
+  async mounted() {
+    await this.listar();
   },
 
   methods: {
-    listar() {
-      ClanService.list().then((response) => {
-        this.clans = response.data;
-      });
+    async listar() {
+      this.clans = await crud.list(ClanService);
     },
 
-    remover(id, nome) {
-      crud.remove(id, ClanService, nome, this.clans, this.clan.index, "Clã");
+    remover(id, nome, index) {
+      crud.remove(id, ClanService, nome, this.clans, index, "Clã");
     },
 
     atualizar(clan) {
@@ -78,4 +75,11 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.listar {
+  margin-top: 3rem;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

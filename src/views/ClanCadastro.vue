@@ -42,7 +42,7 @@ export default {
 
   methods: {
     save() {
-      crud.insert(this.clan, ClanService);
+      crud.insert(this.clan, ClanService, "Clã");
     },
 
     listar() {
@@ -56,7 +56,7 @@ export default {
     },
   },
 
-  mounted() {
+  async mounted() {
     this.listar();
   },
 };
@@ -70,6 +70,7 @@ export default {
 .cadastro {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 3rem;
   width: 6em;
   background-color: white;
 

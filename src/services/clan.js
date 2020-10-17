@@ -20,7 +20,6 @@ export default {
   },
 
   remove: (id) => {
-    return http.delete("/shinobi/" + id)
+    return http.delete("/clan/" + id)
   },
-
 };

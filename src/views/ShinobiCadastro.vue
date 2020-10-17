@@ -133,8 +133,9 @@
         </div>
 
         <div class="col sm-6 padding-top-none">
+          <p class="margin-top-none">Está Morto?</p>
+
           <fieldset class="form-group margin-none">
-            <p class="margin-top-none">Está Morto?</p>
             <label for="paperSwitch2" class="paper-switch-tile">
               <input
                 id="paperSwitch2"
@@ -142,6 +143,7 @@
                 type="checkbox"
                 v-model="shinobi.morreu"
               />
+
               <div class="paper-switch-tile-card border">
                 <div
                   class="paper-switch-tile-card-front border background-secondary"
@@ -159,7 +161,7 @@
         </div>
       </div>
 
-      <div class="btn-enviar">
+      <div class="btn-enviar margin-top-large">
         <button
           type="button"
           class="paper-btn btn-primary-outline"
@@ -239,7 +241,7 @@ export default {
     },
 
     save() {
-      crud.insert(this.shinobi, ShinobiService);
+      crud.insert(this.shinobi, ShinobiService, "Shinobi");
     },
   },
 };
@@ -255,6 +257,7 @@ export default {
   margin-right: auto;
   width: 6em;
   background-color: white;
+  margin-top: 3rem;
 
   margin-bottom: 1rem;
   padding: 1rem;
