@@ -1,23 +1,51 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+
+
+/*
+* @Componentes das rotas
+*/
+import ShinobiCadastro from '../views/ShinobiCadastro.vue'
+import ShinobiListagem from '../views/ShinobiListar.vue'
+import ClanCadastro from '../views/ClanCadastro.vue'
+import ClanListagem from '../views/ClanListar.vue'
+// import UsuarioCadastro from '../views/Home.vue'
+// import UsuarioListagem from '../views/Home.vue'
+import Index from '../views/Index.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: Index
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+    path: '/cadastrar-shinobi',
+    component: ShinobiCadastro
+  },
+  {
+    path: '/listar-shinobis',
+    component: ShinobiListagem
+  },
+  {
+    path: '/cadastrar-clan',
+    name: 'c-clan',
+    component: ClanCadastro
+  },
+  {
+    path: '/listar-clans',
+    component: ClanListagem
+  },
+  // {
+  //   path: '/cadastro-usuario',
+  //   component: Home
+  // },
+  // {
+  //   path: '/listagem-usuario',
+  //   component: Home
+  // },
 ]
 
 const router = new VueRouter({
