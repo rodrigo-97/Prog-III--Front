@@ -4,7 +4,8 @@
 */
 
 import Vuex from "vuex";
-import Vue from "vue"
+import Vue from "vue";
+// import SessionKeystore from "session-keystore"
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
@@ -27,7 +28,8 @@ const store = new Vuex.Store({
 			id: "",
 			nome: "",
 			index: ""
-		}
+		},
+		logado: true
 	},
 
 
@@ -36,8 +38,9 @@ const store = new Vuex.Store({
 	* 					Funciona como um get normal
 	*/
 	getters: {
-		shinobi: (state) => state.shinobi,
-		clan: state => state.clan
+		shinobi: state => state.shinobi,
+		clan: state => state.clan,
+		logado: state => state.logado
 	},
 
 	/*
@@ -50,7 +53,7 @@ const store = new Vuex.Store({
 
 		clanCadastro: (state, clan) => {
 			state.clan = clan
-		}
+		},
 	},
 });
 

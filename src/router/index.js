@@ -11,7 +11,7 @@ import ClanCadastro from '../views/ClanCadastro.vue'
 import ClanListagem from '../views/ClanListar.vue'
 // import UsuarioCadastro from '../views/Home.vue'
 // import UsuarioListagem from '../views/Home.vue'
-import Index from '../views/Index.vue'
+import Login from '../views/Login.vue'
 
 
 Vue.use(VueRouter)
@@ -19,7 +19,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: Index
+    name: "login",
+    component: Login
   },
   {
     path: '/cadastrar-shinobi',
@@ -53,5 +54,6 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
 
 export default router

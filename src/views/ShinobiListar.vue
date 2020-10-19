@@ -79,7 +79,7 @@ export default {
 
     edit(shinobi) {
       store.commit("shinobiCadastro", shinobi);
-      this.$router.push({ path: "cadastrar-shinobi" });
+      this.$router.push({ path: "/cadastrar-shinobi" });
     },
 
     fichaShinobi(shinobi) {

@@ -24,6 +24,14 @@
             >
               Salvar
             </button>
+            <button
+              type="button"
+              class="paper-btn btn-primary-outline border border-3 border-primary col sm-4"
+              style="width: 20%"
+              @click="limparCampos()"
+            >
+            Limpar Campos
+            </button>
           </div>
         </div>
       </div>
@@ -34,10 +42,12 @@
 <script>
 import ClanService from "../services/clan";
 import { crud } from "../Mini-controlador/controlador";
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
+import  store  from "../store";
 export default {
   computed: {
-    ...mapGetters(["clan"]),
+    ...mapGetters(["clan", "logado"]),
+    ...mapMutations(["ClanCadastro"])
   },
 
   methods: {
@@ -52,11 +62,14 @@ export default {
     },
 
     limparCampos() {
-      this.clan = { nome: "", id: "" };
+      store.commit("clanCadastro", {id: "", nome: "", index: ""})
     },
   },
 
   async mounted() {
+    if (this.logado == false){
+      this.$router.push({ path: "/" });
+    }
     this.listar();
   },
 };

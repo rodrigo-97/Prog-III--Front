@@ -1,3 +1,3 @@
 <template>
-  <div>Olá</div>
+  <div style="background-color: red; width: 200px; height: 200px; margin: 100px">Olá</div>
 </template>
