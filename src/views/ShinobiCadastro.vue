@@ -144,16 +144,16 @@
                 v-model="shinobi.morreu"
               />
 
-              <div class="paper-switch-tile-card border">
+              <div class="paper-switch-tile-card border"  style="width=100px">
                 <div
                   class="paper-switch-tile-card-front border background-secondary"
                 >
-                  Vivão :D
+                  Vivão🤩
                 </div>
                 <div
                   class="paper-switch-tile-card-back border background-danger"
                 >
-                  Sim :'C
+                  Sim 😢
                 </div>
               </div>
             </label>
@@ -213,10 +213,8 @@ export default {
     };
   },
 
-  mounted() {
-    ClanService.list().then((response) => {
-      this.clans = response.data;
-    });
+  async mounted() {
+    this.clans = await crud.list(ClanService)
   },
 
   methods: {

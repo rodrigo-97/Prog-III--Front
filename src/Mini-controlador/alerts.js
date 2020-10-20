@@ -59,7 +59,7 @@ function alertAlterar(nomeEntidade, entidade) {
   })
 }
 
-function alertConfirmarExclusao(id, service, nome, listaEntidade, index, nomeEntidade) {
+async function alertConfirmarExclusao(id, service, nome, listaEntidade, index, nomeEntidade) {
   botaoDiferente.fire({
     title: `Tem certeza? by: Pain`,
     text: `Pq cê ta fazendo isso, o ${nomeEntidade} ${nome} é tão legal 😭`,
@@ -85,7 +85,7 @@ function alertConfirmarExclusao(id, service, nome, listaEntidade, index, nomeEnt
             imageHeight: 240,
             reverseButtons: true
           })
-          return true
+          return result.resolve(true)
         }
       })
       .catch((erro) => {
@@ -103,9 +103,6 @@ function alertConfirmarExclusao(id, service, nome, listaEntidade, index, nomeEnt
         imageHeight: 240,
         reverseButtons: true
       })
-
-      const retorno = false
-      return retorno
     }
   })
 }

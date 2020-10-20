@@ -29,7 +29,6 @@ const store = new Vuex.Store({
 			nome: "",
 			index: ""
 		},
-		logado: true
 	},
 
 
@@ -40,7 +39,8 @@ const store = new Vuex.Store({
 	getters: {
 		shinobi: state => state.shinobi,
 		clan: state => state.clan,
-		logado: state => state.logado
+		logado: state => state.logado,
+		usuario: state => state.usuario,
 	},
 
 	/*
@@ -53,6 +53,10 @@ const store = new Vuex.Store({
 
 		clanCadastro: (state, clan) => {
 			state.clan = clan
+		},
+
+		usuarioCadastro: (state, usuario) => {
+			state.usuario = usuario
 		},
 	},
 });

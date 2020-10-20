@@ -67,14 +67,16 @@ export default {
   },
 
   mounted() {
-    ShinobiService.list().then((response) => {
-      this.shinobis = response.data;
-    });
+    this.listar()
   },
 
   methods: {
     remove(id, nome, index) {
       crud.remove(id, ShinobiService, nome, this.shinobis, index, "Shinobi");
+    },
+
+    async listar (){
+      this.shinobis = await crud.list(ShinobiService)
     },
 
     edit(shinobi) {

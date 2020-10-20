@@ -49,28 +49,15 @@ export default {
     ...mapGetters(["clan", "logado"]),
     ...mapMutations(["ClanCadastro"])
   },
-
+  
   methods: {
     save() {
       crud.insert(this.clan, ClanService, "Clã");
     },
 
-    listar() {
-      ClanService.list().then((response) => {
-        this.clans = response.data;
-      });
-    },
-
     limparCampos() {
       store.commit("clanCadastro", {id: "", nome: "", index: ""})
     },
-  },
-
-  async mounted() {
-    if (this.logado == false){
-      this.$router.push({ path: "/" });
-    }
-    this.listar();
   },
 };
 </script>
